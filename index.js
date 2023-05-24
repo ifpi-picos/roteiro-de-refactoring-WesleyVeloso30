@@ -7,10 +7,14 @@ function gerarFaturaStr (fatura, pecas) {
     const formato = new Intl.NumberFormat("pt-BR",
                           { style: "currency", currency: "BRL",
                             minimumFractionDigits: 2 }).format;
+
+    function getPeca(apresentacao) {
+      return pecas[apresentacao.id];
+    }
   
     for (let apre of fatura.apresentacoes) {
-      const peca = pecas[apre.id];
-      function calcularTotalApresentacao(apre, peca) {
+      const peca = getPeca(apre);
+      function calcularTotalApresentacao(apre) {
         let total = 0;
     
         switch (peca.tipo) {
@@ -33,7 +37,7 @@ function gerarFaturaStr (fatura, pecas) {
         return total;
       }
 
-      let total = calcularTotalApresentacao(apre, peca);
+      let total = calcularTotalApresentacao(apre);
 
       // créditos para próximas contratações
       creditos += Math.max(apre.audiencia - 30, 0);
