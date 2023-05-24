@@ -26,7 +26,7 @@ function calcularTotalCreditos(apresentacoes) {
   return total;
 }
 
-function calcularTotalApresentacao(apre) {
+function calcularTotalApresentacao(apre, peca) {
     let total = 0;
     switch (getPeca(apre).tipo) {
       case "tragedia":
